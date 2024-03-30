@@ -2,10 +2,10 @@ name: "Terraform"
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-  pull_request:
+  # push:
+  #   branches:
+  #     - main
+  # pull_request:
 
 jobs:
   terraform:
@@ -21,7 +21,7 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           # terraform_version: 1.4.2
-          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+          # cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
       - name: Terraform Format
         id: fmt
