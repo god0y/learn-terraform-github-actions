@@ -1,19 +1,3 @@
 # Automate Terraform with GitHub Actions
 
 This repo is a companion repo to the [Automate Terraform with GitHub Actions tutorial](https://developer.hashicorp.com/terraform/tutorials/automation/github-actions).
-sadsadsadadadsdfasdfasdfasdfdsafdsafdasfadsfdasfdsafdsafd
-
-dsafadsfdsafasf
-asdfasdfasdfasdfadsfdsaf
-asdfasdfasdfasdfasdfadsf
-asdfasdfasdfasdfasdfdasfdsafads
-fdsaasdfadsfsaf
-asdfasdf
-asdf
-asdf
-asdfa
-sdfa
-sdfasd
-fasdfadsfdasfdasfdasfdsafdas
-asdfasdfasdfasdfadsfdasfadsf
-asdfasdfasdfasdfasfdasfdasfdasdfasdfsdvcxzjhkfaSDHJLKGadfshjlkzfxdcaHJKLSDFAJHKLFSDAHJKLSDFAHJLKSDFAGHJKLDFHJLKDFGSHLJKERQTYIUOPGXDCFVNJ,KB
