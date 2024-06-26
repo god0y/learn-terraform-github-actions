@@ -71,14 +71,6 @@ jobs:
           commit_Author: ArbotCross <ArbotCross@users.noreply.github.com>
           push_options: --force
 
-      - name: Set env SKIP
-        run: |
-          if [[ ${{ env.LATEST_TAG}} == ${{ steps.versioning.outputs.version_tag }} ]]; then
-              echo "SKIP=true" >> "$GITHUB_ENV"
-          else
-              echo "SKIP=false" >> "$GITHUB_ENV"
-          fi
-
     outputs:
       version_tag: ${{ steps.versioning.outputs.version_tag }}
       version: ${{ steps.versioning.outputs.version }}
