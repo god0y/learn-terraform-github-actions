@@ -71,6 +71,14 @@ jobs:
           commit_Author: ArbotCross <ArbotCross@users.noreply.github.com>
           push_options: --force
 
+      - name: Set env SKIP
+        run: |
+          if [[ ${{ env.LATEST_TAG}} == ${{ steps.versioning.outputs.version_tag }} ]]; then
+              echo "SKIP=true" >> "$GITHUB_ENV"
+          else
+              echo "SKIP=false" >> "$GITHUB_ENV"
+          fi
+
     outputs:
       version_tag: ${{ steps.versioning.outputs.version_tag }}
       version: ${{ steps.versioning.outputs.version }}
@@ -102,6 +110,9 @@ jobs:
             automatic_release_tag: "${{ env.VERSION_TAG }}"
             prerelease: false
 
+        - name: "Checkout"
+          uses: actions/checkout@v4
+
         - name: "Generate release changelog"
           uses: heinrichreimer/action-github-changelog-generator@v2.3
           with:
@@ -119,4 +130,5 @@ jobs:
             file_pattern: CHANGELOG.md
             commit_user_name: GitHub Actions
             commit_user_email: 41898282+github-actions[bot]@users.noreply.github.com
+            commit_Author: ArbotCross <ArbotCross@users.noreply.github.com>
             push_options: --force
