@@ -1,6 +1,6 @@
 {
   "name": "addpay-front",
-  "version": "teste",
+  "version": "batatinha",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
