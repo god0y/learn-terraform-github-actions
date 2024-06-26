@@ -1,6 +1,6 @@
 {
   "name": "addpay-front",
-  "version": "nasa",
+  "version": "boiadapassando",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
