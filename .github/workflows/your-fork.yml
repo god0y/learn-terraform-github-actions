@@ -15,7 +15,6 @@
 #         # Optional. Post a issue comment just before closing a pull request.
 #         comment: "Hi! If you are following the Terraform GitHub Actions tutorial, please open the PR against [your personal fork](https://learn.hashicorp.com/tutorials/terraform/github-actions?in=terraform/automation#set-up-a-github-repository) of this repository. We will automatically close this PR, but if you intended to edit the example itself please feel free to re-open it."
 
-
 name: release
 on:
   workflow_dispatch:
@@ -37,6 +36,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.JTPATGHPKG001 }}
 
       - name: "Set latest tag"
         id: set-latest-tag
@@ -71,70 +71,70 @@ jobs:
           commit_Author: ArbotCross <ArbotCross@users.noreply.github.com>
           push_options: --force
 
-      # - name: Set env SKIP
-      #   run: |
-      #     if [[ ${{ env.LATEST_TAG}} == ${{ steps.versioning.outputs.version_tag }} ]]; then
-      #         echo "SKIP=true" >> "$GITHUB_ENV"
-      #     else
-      #         echo "SKIP=false" >> "$GITHUB_ENV"
-      #     fi
+      - name: Set env SKIP
+        run: |
+          if [[ ${{ env.LATEST_TAG}} == ${{ steps.versioning.outputs.version_tag }} ]]; then
+              echo "SKIP=true" >> "$GITHUB_ENV"
+          else
+              echo "SKIP=false" >> "$GITHUB_ENV"
+          fi
 
-      outputs:
-        version_tag: ${{ steps.versioning.outputs.version_tag }}
-        version: ${{ steps.versioning.outputs.version }}
-        latest_tag: ${{ env.LATEST_TAG }}
-        skip: ${{ env.SKIP }} 
-  
-    release:
-        name: "release"
-        if: needs.semantic-version.outputs.skip != 'true'
-        runs-on: ubuntu-latest
-        concurrency: release
-        needs: [semantic-version]
-        permissions:
-          id-token: write
-          contents: write
-        env:
-          LATEST_TAG: ${{ needs.semantic-version.outputs.latest_tag }}
-          VERSION_TAG: ${{ needs.semantic-version.outputs.version_tag }}
-          VERSION: ${{ needs.semantic-version.outputs.version }}
-        steps:
-          
-          - name: "Checkout"
-            uses: actions/checkout@v4
-            with:
-              token: ${{ secrets.JTPATGHPKG001 }}
-  
-          - name: Create Release
-            uses: "marvinpinto/action-automatic-releases@latest"
-            with:
-              repo_token: "${{ secrets.JTPATGHPKG001 }}"
-              title: "${{ env.VERSION_TAG }}"
-              automatic_release_tag: "${{ env.VERSION_TAG }}"
-              prerelease: false
-  
-          - name: "Checkout"
-            uses: actions/checkout@v4
-            with:
-              token: ${{ secrets.JTPATGHPKG001 }}
-  
-          - name: "Generate release changelog"
-            uses: heinrichreimer/action-github-changelog-generator@v2.3
-            with:
-              working-directory: ./
-              token: ${{ secrets.JTPATGHPKG001 }}
-              issues: false
-              issuesWoLabels: false
-              pullRequests: false
-              prWoLabels: false
-              excludeTagsRegex: "v[0-2]-[0-2]-*"
-              output: ./CHANGELOG.md
-  
-          - uses: stefanzweifel/git-auto-commit-action@v5
-            with:
-              commit_message: ${{ env.VERSION_TAG }}
-              file_pattern: CHANGELOG.md
-              commit_user_name: GitHub Actions
-              commit_user_email: 41898282+github-actions[bot]@users.noreply.github.com
-              commit_Author: ArbotCross <ArbotCross@users.noreply.github.com>
-              push_options: --force
+    outputs:
+      version_tag: ${{ steps.versioning.outputs.version_tag }}
+      version: ${{ steps.versioning.outputs.version }}
+      latest_tag: ${{ env.LATEST_TAG }}
+      skip: ${{ env.SKIP }} 
+
+  release:
+      name: "release"
+      if: needs.semantic-version.outputs.skip != 'true'
+      runs-on: ubuntu-latest
+      concurrency: release
+      needs: [semantic-version]
+      permissions:
+        id-token: write
+        contents: write
+      env:
+        LATEST_TAG: ${{ needs.semantic-version.outputs.latest_tag }}
+        VERSION_TAG: ${{ needs.semantic-version.outputs.version_tag }}
+        VERSION: ${{ needs.semantic-version.outputs.version }}
+      steps:
+        
+        - name: "Checkout"
+          uses: actions/checkout@v4
+          with:
+            token: ${{ secrets.JTPATGHPKG001 }}
+
+        - name: Create Release
+          uses: "marvinpinto/action-automatic-releases@latest"
+          with:
+            repo_token: "${{ secrets.JTPATGHPKG001 }}"
+            title: "${{ env.VERSION_TAG }}"
+            automatic_release_tag: "${{ env.VERSION_TAG }}"
+            prerelease: false
+
+        - name: "Checkout"
+          uses: actions/checkout@v4
+          with:
+            token: ${{ secrets.JTPATGHPKG001 }}
+
+        - name: "Generate release changelog"
+          uses: heinrichreimer/action-github-changelog-generator@v2.3
+          with:
+            working-directory: ./
+            token: ${{ secrets.JTPATGHPKG001 }}
+            issues: false
+            issuesWoLabels: false
+            pullRequests: false
+            prWoLabels: false
+            excludeTagsRegex: "v[0-2]-[0-2]-*"
+            output: ./CHANGELOG.md
+
+        - uses: stefanzweifel/git-auto-commit-action@v5
+          with:
+            commit_message: ${{ env.VERSION_TAG }}
+            file_pattern: CHANGELOG.md
+            commit_user_name: GitHub Actions
+            commit_user_email: 41898282+github-actions[bot]@users.noreply.github.com
+            commit_Author: ArbotCross <ArbotCross@users.noreply.github.com>
+            push_options: --force
