@@ -103,16 +103,16 @@ jobs:
             automatic_release_tag: "${{ env.VERSION_TAG }}"
             prerelease: false
 
-        - name: "Generate release changelog"
-          uses: heinrichreimer/action-github-changelog-generator@v2.3
-          with:
-            working-directory: ./
-            issues: false
-            issuesWoLabels: false
-            pullRequests: false
-            prWoLabels: false
-            excludeTagsRegex: "v[0-2]-[0-2]-*"
-            output: ./CHANGELOG.md
+        # - name: "Generate release changelog"
+        #   uses: heinrichreimer/action-github-changelog-generator@v2.3
+        #   with:
+        #     working-directory: ./
+        #     issues: false
+        #     issuesWoLabels: false
+        #     pullRequests: false
+        #     prWoLabels: false
+        #     excludeTagsRegex: "v[0-2]-[0-2]-*"
+        #     output: ./CHANGELOG.md
 
         - uses: stefanzweifel/git-auto-commit-action@v5
           with:
