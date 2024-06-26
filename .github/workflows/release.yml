@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   format-code:
@@ -23,7 +23,7 @@ jobs:
         run: |
                 tmp=$(mktemp)
                 cd vue
-                cat package.json | jq --arg v "4.22.2" '.version = "nasa"' > $tmp && mv $tmp packagen.json  
+                cat package.json | jq --arg v "4.22.2" '.version = "nasa"' >> $tmp && mv $tmp packagen.json  
                 cd .. && rm -rf .git/COMMIT_EDITMSG
 
       - uses: stefanzweifel/git-auto-commit-action@v5
