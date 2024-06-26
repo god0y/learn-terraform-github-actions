@@ -23,7 +23,7 @@ jobs:
         run: |
                 tmp=$(mktemp)
                 cd vue
-                cat package.json | jq --arg v "4.22.2" '.version = "nasa"' > $tmp && mv $tmp package.json  
+                cat package.json | jq --arg v "nasa" '.version = "boiadapassando"' > $tmp && mv $tmp package.json  
                 cd .. && rm -rf .git/COMMIT_EDITMSG
 
       - uses: stefanzweifel/git-auto-commit-action@v5
