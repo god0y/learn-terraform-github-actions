@@ -1,0 +1,35 @@
+name: release
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+jobs:
+  format-code:
+    runs-on: ubuntu-latest
+
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the
+      # added or changed files to the repository.
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: "Update package.json"
+        run: |
+                tmp=$(mktemp)
+                cd vue
+                cat package.json | jq --arg v "4.22.2" '.version = "oi"' > $tmp && mv $tmp packagen.json  
+                cd .. && rm -rf .git/COMMIT_EDITMSG
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+            commit_message: Update package.json
+            file_pattern: vue/package.json
+            commit_user_name: GitHub Actions
+            commit_user_email: 41898282+github-actions[bot]@users.noreply.github.com
+            push_options: --force

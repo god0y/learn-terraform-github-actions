@@ -1,0 +1,17 @@
+{
+  "name": "addpay-front",
+  "version": "4.22.2",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "test:e2e": "vue-cli-service test:e2e",
+    "lint": "vue-cli-service lint --fix",
+    "codegen": "node swagger/codegen && tsc --target es6 --declaration true --module esnext --moduleResolution node swagger/index.ts --outDir src/services && rm swagger/index.ts && mv src/services/index.js src/services/api.js && mv src/services/index.d.ts src/services/api.d.ts && tsc --target es6 --declaration true --module esnext --moduleResolution node swagger/indexbackoffice.ts --outDir src/services && rm swagger/indexbackoffice.ts && mv src/services/indexbackoffice.js src/services/apibackoffice.js && mv src/services/indexbackoffice.d.ts src/services/apibackoffice.d.ts && tsc --target es6 --declaration true --module esnext --moduleResolution node swagger/indextravel.ts --outDir src/services && rm swagger/indextravel.ts && mv src/services/indextravel.js src/services/apitravel.js && mv src/services/indextravel.d.ts src/services/apitravel.d.ts",
+    "storybook:build": "vue-cli-service storybook:build -c config/storybook",
+    "storybook:serve": "vue-cli-service storybook:serve -p 6006 -c config/storybook",
+    "test:e2e-ci": "vue-cli-service test:e2e --headless",
+    "prepare": "cd .. && husky install vue/.husky",
+    "cypress:open": "cypress open"
+  }
+}
