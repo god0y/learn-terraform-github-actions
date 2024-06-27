@@ -68,7 +68,6 @@ jobs:
           file_pattern: vue/package.json
           commit_user_name: GitHub Actions
           commit_user_email: 41898282+github-actions[bot]@users.noreply.github.com
-          commit_Author: ArbotCross
           skip_checkout: true
           push_options: --force
 
