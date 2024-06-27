@@ -21,12 +21,21 @@
 #         with:
 #           ref: ${{ github.head_ref }}
 
+<<<<<<< HEAD
+      - name: "Update package.json"
+        run: |
+                tmp=$(mktemp)
+                cd vue
+                cat package.json | jq --arg v "batatinha" '.version = "alterado"' > $tmp && mv $tmp package.json  
+                cd .. && rm -rf .git/COMMIT_EDITMSG
+=======
 #       - name: "Update package.json"
 #         run: |
 #                 tmp=$(mktemp)
 #                 cd vue
 #                 cat package.json | jq --arg v "alterado" '.version = "teste_novo_de_novo"' > $tmp && mv $tmp package.json  
 #                 cd .. && rm -rf .git/COMMIT_EDITMSG
+>>>>>>> cadc5879339b493c4c0d114283e0c4d8dd5b4a02
 
 #       - uses: stefanzweifel/git-auto-commit-action@v5
 #         with:
