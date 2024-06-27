@@ -1,6 +1,6 @@
 {
   "name": "addpay-front",
-  "version": "4.19.1",
+  "version": "0.22.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
