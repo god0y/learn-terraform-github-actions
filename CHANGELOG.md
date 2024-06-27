@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.15.0](https://github.com/god0y/learn-terraform-github-actions/tree/v0.15.0) (2024-06-27)
+
+[Full Changelog](https://github.com/god0y/learn-terraform-github-actions/compare/v0.14.0...v0.15.0)
+
 ## [v0.14.0](https://github.com/god0y/learn-terraform-github-actions/tree/v0.14.0) (2024-06-26)
 
 [Full Changelog](https://github.com/god0y/learn-terraform-github-actions/compare/v0.13.0...v0.14.0)
